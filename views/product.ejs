@@ -1,0 +1,77 @@
+<!-- <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Sản Phẩm</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Danh sách sản phẩm</h1>
+        <a href="/">🏠 Trang chủ</a> |
+        <a href="/cart">🛒 Giỏ hàng</a>
+    </header>
+    
+    <main>
+        <div class="product-list">
+            <% products.forEach(product => { %>
+                <div class="product">
+                    <img src="<%= product.image %>" alt="<%= product.name %>">
+                    <h3><%= product.name %></h3>
+                    <p>Giá: <%= product.price.toLocaleString('vi-VN') %> VND</p>
+                    <a href="/product-detail/<%= product._id %>">Xem chi tiết</a>
+                    <form action="/cart/add/<%= product._id %>" method="POST">
+                        <button type="submit">Thêm vào giỏ</button>
+                    </form>
+                </div>
+            <% }) %>
+        </div>
+    </main>
+</body>
+</html>
+ -->
+
+ <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Sản Phẩm</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Danh sách sản phẩm</h1>
+        <a href="/">🏠 Trang chủ</a> |
+        <a href="/cart">🛒 Giỏ hàng</a> |
+        <a href="/create">➕ Tạo sản phẩm</a>
+    </header>
+    
+    <main>
+        <div class="product-list">
+            <% products.forEach(product => { %>
+                <div class="product">
+                    <img src="<%= product.image %>" alt="<%= product.name %>">
+                    <h3><%= product.name %></h3>
+                    <p>Giá: <%= product.price.toLocaleString('vi-VN') %> VND</p>
+                    <a href="/product-detail/<%= product._id %>">Xem chi tiết</a>
+
+                    <form action="/cart/add/<%= product._id %>" method="POST">
+                        <button class="them" type="submit">Thêm vào giỏ</button>
+                    </form>
+
+                    <form action="/edit/<%= product._id %>" method="POST">
+                        <a class="sua" href="/edit/<%= product._id %>">✏️ Sửa</a>
+                    </form>
+
+                    <form action="/delete/<%= product._id %>" method="POST">
+                        <button class="xoa" type="submit">❌ Xóa</button>
+                    </form>
+
+                </div>
+            <% }) %>
+        </div>
+    </main>
+</body>
+</html>

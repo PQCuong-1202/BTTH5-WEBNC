@@ -1,0 +1,51 @@
+
+ <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <a href="/">🏠 Trang chủ</a> |
+        <a href="/product">📦 Danh sách sản phẩm</a>
+    </header>
+
+    <main>
+        <div class="cart-container">
+            <h1>Giỏ hàng</h1>
+            <ul class="cart-list">
+              <% let totalPrice = 0; %>
+              <% cartItems.forEach(function(item) { 
+              let quantity = (cart && cart[item._id]) ? cart[item._id] : 1; // ✅ Kiểm tra cart trước khi dùng
+              let itemTotal = item.price * quantity;
+              totalPrice += itemTotal;%>
+            <li class="cart-item">
+              <img class="cart-image" src="<%= item.image %>" alt="<%= item.name %>">
+              <p class="cart-name"><%= item.name %></p>
+              <p class="cart-price"><%= item.price.toLocaleString('vi-VN') %> VNĐ</p>
+
+              <form action="/cart/update/<%= item._id %>" method="POST">
+                  <button class="decrease" type="submit" name="action" value="decrease">➖</button>
+                  <span class="cart-quantity"><%= quantity %></span>
+                  <button class="increase" type="submit" name="action" value="increase">➕</button>
+              </form>
+
+              <form action="/cart/remove/<%= item._id %>" method="POST">
+                  <button type="submit" class="remove-from-cart-btn">Xóa khỏi giỏ</button>
+              </form>
+              <form action="/cart/totalPrice/" method="POST">
+                  <p class="cart-item-total">Tổng: <%= itemTotal.toLocaleString('vi-VN') %> VNĐ</p>
+              </form>
+            </li>
+            <% }); %>
+            <form action="/cart/totalCart/" method="POST">
+              <h2>Tổng tiền: <%= totalPrice.toLocaleString('vi-VN') %> VNĐ</h2>
+            </form>
+              <a class="back-link" href="/">Quay lại</a>
+        </div>
+    </main>
+</body>
+</html>
